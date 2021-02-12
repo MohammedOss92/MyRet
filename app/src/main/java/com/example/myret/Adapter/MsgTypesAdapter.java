@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.myret.Modal.MsgTypes;
+import com.example.myret.Modal.MsgsTypeWithCount;
 import com.example.myret.MsgsActivity;
 import com.example.myret.R;
 
@@ -25,10 +26,10 @@ import java.util.List;
 public class MsgTypesAdapter extends RecyclerView.Adapter<MsgTypesAdapter.MsgTypesViewHolder> {
 
     private Context context;
-    private List<MsgTypes> msgTypesList=new ArrayList<>();
+    private List<MsgsTypeWithCount> msgTypesList=new ArrayList<>();
 
 
-    public MsgTypesAdapter(Context context, List<MsgTypes> msgTypesList) {
+    public MsgTypesAdapter(Context context, List<MsgsTypeWithCount> msgTypesList) {
         this.context = context;
         this.msgTypesList = msgTypesList;
     }
@@ -41,9 +42,10 @@ public class MsgTypesAdapter extends RecyclerView.Adapter<MsgTypesAdapter.MsgTyp
 
     @Override
     public void onBindViewHolder(@NonNull MsgTypesViewHolder holder, int position) {
-        MsgTypes msgTypes = msgTypesList.get(position);
+        MsgsTypeWithCount msgsTypeWithCount= msgTypesList.get(position);
+        MsgTypes msgTypes = msgsTypeWithCount.getMsgTypes();
         holder.tv_desc.setText( msgTypes.getTypeDescription());
-        holder.tv_newMsg.setText( msgTypes.getNewMsg());
+        holder.tv_newMsg.setText( String.valueOf(msgsTypeWithCount.getSubCount()));
 //        holder.tv_desc.setText("tv_desc" + msgTypes.getTypeDescription());
 //        holder.tv_newMsg.setText("tv_newMsg" + msgTypes.getNewMsg());
         SharedPreferences preferences =context.getSharedPreferences("MYPREFS", MODE_PRIVATE);
@@ -60,7 +62,7 @@ public class MsgTypesAdapter extends RecyclerView.Adapter<MsgTypesAdapter.MsgTyp
 
     }
 
-    public void setAllMsgTypes(List<MsgTypes> msgTypesList) {
+    public void setAllMsgTypes(List<MsgsTypeWithCount> msgTypesList) {
         this.msgTypesList = msgTypesList;
     }
 

@@ -16,6 +16,7 @@ import com.example.myret.Modal.MsgTypes;
 import com.example.myret.Modal.MsgTypesResponse;
 import com.example.myret.Modal.Msgs;
 import com.example.myret.Modal.MsgsResponse;
+import com.example.myret.Modal.MsgsTypeWithCount;
 import com.example.myret.Network.ApiClient;
 import com.example.myret.Network.ApiClientMsg;
 import com.example.myret.Repository.MsgTypesRespository;
@@ -33,7 +34,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MsgTypesAdapter msgTypesAdapter;
-    private List<MsgTypes> msgTypeList= new ArrayList<>();
+    private List<MsgsTypeWithCount> msgTypeList= new ArrayList<>();
     MsgTypesRespository msgTypesRespository;
     MsgTypesViewModal msgTypesViewModal;
     @Override
@@ -48,12 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         msgTypesRespository = new MsgTypesRespository(getApplication());
         msgTypesViewModal = new ViewModelProvider(this).get(MsgTypesViewModal.class);
-        msgTypesViewModal.getAllMsgTypesm().observe(this, new Observer<List<MsgTypes>>() {
+        msgTypesViewModal.getAllMsgTypesm().observe(this, new Observer<List<MsgsTypeWithCount>>() {
             @Override
-            public void onChanged(List<MsgTypes> msgTypesList) {
+            public void onChanged(List<MsgsTypeWithCount> msgTypesList) {
                 msgTypesAdapter.setAllMsgTypes(msgTypesList);
                 recyclerView.setAdapter(msgTypesAdapter);
-
             }
         });
 
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 for(MsgTypes msgTypes : response.body().getMsgTypes()){
                     getAllModals22(msgTypes.getTypeID()) ;
                 }
+
             }
 
             @Override

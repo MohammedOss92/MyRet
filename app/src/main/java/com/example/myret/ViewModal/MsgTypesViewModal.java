@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.myret.Modal.MsgTypes;
+import com.example.myret.Modal.MsgsTypeWithCount;
 import com.example.myret.Repository.MsgTypesRespository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public class MsgTypesViewModal extends AndroidViewModel {
 
     private MsgTypesRespository msgTypesRespository;
-    private LiveData<List<MsgTypes>>getAllMsgTypesaa;
+    private LiveData<List<MsgsTypeWithCount>>getAllMsgTypesaa;
 
     public MsgTypesViewModal(@NonNull Application application) {
         super(application);
@@ -26,8 +27,12 @@ public class MsgTypesViewModal extends AndroidViewModel {
         msgTypesRespository.insert_msgtypes(list);
     }
 
-    public LiveData<List<MsgTypes>> getAllMsgTypesm(){
+    public LiveData<List<MsgsTypeWithCount>> getAllMsgTypesm(){
 
         return getAllMsgTypesaa ;
+    }
+
+    public void refresh(){
+        getAllMsgTypesaa= msgTypesRespository.getAllMsgTypesaa();
     }
 }

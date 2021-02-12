@@ -27,12 +27,12 @@ public class MsgsAdap extends RecyclerView.Adapter<MsgsAdap.ViewHolder> {
 
     @NonNull
     @Override
-    public MsgsAdap.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_msgs,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MsgsAdap.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Msgs msgs = msgsList.get(position);
         holder.txt_msg.setText(msgs.getMsgDescription());
